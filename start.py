@@ -45,10 +45,10 @@ def get_activepage():
     if driver.current_window_handle != handle:
        driver.switch_to.window(handle)
 #==========================================================
-def test():
+def test1():
     pass
 #==========================================================
-ahk.add_hotkey('f6', callback=test)
+ahk.add_hotkey('f6', callback=test1)
 ahk.add_hotkey('F1', callback=lambda: print(navigations.process_url("https://rew.muzkult.ru")))
 #==========================================================
 ahk.start_hotkeys()  
