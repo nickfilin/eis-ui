@@ -17,6 +17,7 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Формируем путь к папке profile в той же директории
 profile_dir = os.path.join(script_dir, "profile")
+print(profile_dir)
 # Настройка опций Chrome
 options = Options()
 options.add_argument(f"--allow-profiles-outside-user-dir")
@@ -30,8 +31,8 @@ options.page_load_strategy = 'none'
 options.add_experimental_option("excludeSwitches", ["enable-logging"]) # помогло подавить логи
 # Запуск драйвера
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
-driver.get('https://demo.msk.muzkult.ru/cpa')
-#driver.get('https://muz.helpdeskeddy.com/')
+#driver.get('https://demo.msk.muzkult.ru/cpa')
+driver.get('https://muz.helpdeskeddy.com/')
 # Захват активной страницы
 def get_activepage():
     request = requests.get("http://127.0.0.1:9222/json")
@@ -45,11 +46,8 @@ def get_activepage():
     if driver.current_window_handle != handle:
        driver.switch_to.window(handle)
 #==========================================================
-def test1():
-    pass
-#==========================================================
-ahk.add_hotkey('f6', callback=test1)
 ahk.add_hotkey('F1', callback=lambda: print(navigations.process_url("https://rew.muzkult.ru")))
+ahk.add_hotkey('F2', callback=lambda: [get_activepage(), navigations.open_task(driver)])
 #==========================================================
 ahk.start_hotkeys()  
 ahk.block_forever()
